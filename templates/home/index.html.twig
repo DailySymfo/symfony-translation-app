@@ -1,0 +1,307 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Translate-App{% endblock %}
+
+{% block body %}
+
+<style>
+   
+   
+   
+   .container-header
+   {
+    position: relative;
+    left: 655px;
+    top: 163px;
+    border: 2px solid black;
+    width: 321px;
+    height: 31px;
+    text-align: center;
+    border-radius: 6px;
+   }
+   
+   .left-lang
+   {
+     position: absolute;
+    left: 9px;
+    top: 4px;
+    width: 104px;
+    /* height: 226px; */
+    font-family: 'Darker Grotesque';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 27px;
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+   }
+   .arrow-one
+   {
+    position: absolute;
+    transform: rotate(90deg) scale(0.2);
+    top: -27px;
+    left: 62px;
+    width: 83px;
+    color: red !important;
+   }
+
+   .arrow-switch
+   {
+    position: absolute;
+    left: 136px;
+    width: 30px;
+    color: #bbb !important;
+    border: 1px solid;
+    cursor: pointer;
+   }
+   .right-lang
+   {
+     position: absolute;
+    left: 191px;
+    top: 4px;
+    width: 111px;
+    /* height: 226px; */
+    font-family: 'Darker Grotesque';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 27px;
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+   }
+   .arrow-two
+   {
+    position: absolute;
+    transform: rotate(90deg) scale(0.2);
+    top: -27px;
+    left: 254px;
+    width: 83px;
+    color: red !important;
+   }
+   .container-text
+   {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    position: relative;
+    width: 640px;
+    height: 243px;
+    background: cornflowerblue;
+    left: 482px;
+    top: 190px;
+    border-radius: 10px;
+   }
+   
+   .textleft
+   {
+        position: absolute;
+        width: 278px;
+        height: 226px;
+      
+
+        font-family: 'Darker Grotesque';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 27px;
+        color: #FFFFFF;
+        left: 31px;
+        top: 6px;
+        background: #FFFFFF;
+        border: none;
+        background-color: transparent;
+        resize: none;
+        outline: none;
+
+   }
+   .textright
+   {
+    position: absolute;
+    width: 278px;
+    height: 226px;
+    font-family: 'Darker Grotesque';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    color: #FFFFFF;
+    left: 341px;
+    top: 6px;
+    background: #FFFFFF;
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+   }
+   .separator
+   {
+        position: absolute;
+        width: 650px;
+        /* height: 0px; */
+        top: 79px;
+        border: 1px solid #000000;
+        transform: rotate(90deg) scale(0.2);
+   }
+
+   .btn
+   {
+        position: absolute;
+        width: 128px;
+        height: 47px;
+        background: skyblue;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        cursor: pointer;
+        border-radius: 12px;
+        top: 179px;
+        left: 30px;
+   }
+  
+   @media only screen and (max-width: 1440px) {
+     .container
+     {
+          position: absolute;
+          left: -80px;
+     }
+     
+
+    
+    }
+     /*
+
+    @media only screen and (max-width: 1680px) {
+     .container
+     {
+          position: absolute;
+          left: 42px;
+     }
+     
+
+    
+    }
+
+*/
+    
+
+   
+</style>
+
+     <div class="container">
+     
+          <form action="{{path('app_translate')}}" method="post">
+               
+               <div class="container-header">
+               
+                    <select name="left-lang" id="leftLang" class="left-lang" >
+                              
+                              {% for left in leftLang %}
+                                   <option value="{{left.name}}">{{left.name}}</option>
+                              {% endfor %}
+                              
+                             
+                         
+                    </select>
+
+                    
+               
+                    <img src="{{asset('/image/switch.png')}}" alt="switch" class="arrow-switch" id="switch" onclick="onSwitch()">
+                    
+                    <select name="right-lang" id="rightLang" class="right-lang" >
+                        
+                              {% for right in rightLang %}
+                                   <option value="{{right.name}}">{{right.name}}</option>
+                              {% endfor %}
+                              
+                         
+                    </select>
+
+               
+               </div>
+
+               <div class="container-text">
+
+               
+                     {% if text_to_translate is empty %}
+                          <textarea name="textsend"  cols="30" rows="10" class="textleft" ></textarea>
+                     {% else %}
+                          <textarea name="textsend"  cols="30" rows="10" class="textleft" id="textToTranslate" >{{text_to_translate}}</textarea>
+                     {% endif %}
+                  
+                    <img src="{{asset('/image/line.png')}}" alt="line" class="separator">
+
+                    {% if text_translated is empty %}
+                         <textarea name="textranslated"  cols="30" rows="10" class="textright"></textarea>
+                    {% else %}
+                         <textarea name="textranslated"  cols="30" rows="10" class="textright" id='textTranslated'>{{text_translated}}</textarea>
+                    {% endif %}
+                        
+                    
+                    
+                     <button type="submit" class="btn">
+                         <span>Translate</span>
+                     </button>
+
+               
+               
+
+               </div>
+
+          </form>
+
+     </div>
+
+
+     <script>
+            function onSwitch()
+            {
+                var leftLang=document.getElementById('leftLang').value
+
+                var rightLang= document.getElementById('rightLang').value
+
+                var textTranslated=document.getElementById('textTranslated')
+
+
+                if(textTranslated === null)
+                {
+                    document.getElementById('leftLang').value=rightLang
+
+                    document.getElementById('rightLang').value=leftLang
+                }
+                else
+                {
+                    var textTranslated=document.getElementById('textTranslated').value
+
+                    fetch('https://127.0.0.1:8000/switch',{
+                         method:'POST',
+                         headers:{'content-type':'application/json'},
+                         body:JSON.stringify({
+                              'leftLang':rightLang,
+                              'rightLang':leftLang,
+                              'text_to_translate':textTranslated
+                         }),
+                    })
+
+                    .then((res)=>res.json())
+                    .then((data)=>{
+                        
+                         document.getElementById('leftLang').value=rightLang
+
+                        document.getElementById('rightLang').value=leftLang
+
+                        document.getElementById('textToTranslate').value=textTranslated
+
+                        document.getElementById('textTranslated').value=data.text_translated
+                   
+                    })
+                    .catch((err)=>console.log(err))
+                }
+
+
+            }
+     </script>
+
+{% endblock %}

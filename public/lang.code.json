@@ -1,0 +1,57 @@
+{
+    "lang":[
+    {
+        "id":1,
+        "name":"French",
+        "code":"fr"
+    },
+   
+   
+        {
+        "id":2,
+        "name":"Farsi",
+        "code":"fa"
+    },
+
+
+   
+    {
+        "id":3,
+        "name":"Arabic",
+        "code":"ar"
+    }
+    ,
+    
+    {
+        "id":4,
+        "name":"Dutch",
+        "code":"nl"
+    }
+
+
+    ,
+    {
+        "id":5,
+        "name":"Javanese",
+        "code":"jw"
+    }
+     ,
+    
+    {
+        "id":6,
+        "name":"Lingala",
+        "code":"ln"
+    }
+    ,
+
+    {
+        "id":7,
+        "name":"English",
+        "code":"en"
+    }
+
+
+  ]
+
+
+}
